@@ -1,69 +1,117 @@
-# Prerequisites
-*.d
+# --- openFrameworks generated output ---------------------------------
+#
+# An OF project's own Makefile, config.make and addons.make ARE sources
+# and have to stay tracked. This file started from a generic CMake
+# template that ignored `Makefile`, which would have committed a repo
+# that cannot build. Everything below is produced by `make`.
 
-# Compiled Object files
-*.slo
-*.lo
+# Intermediate build tree (obj/osx/Release/..., obj/linux64/..., ...).
+obj/
+
+# The built app. bin/data is the RUNTIME DATA directory and is tracked --
+# the avatars and presets live there -- so the binary and the bundle are
+# ignored by name rather than ignoring all of bin/.
+bin/*.app/
+bin/patternForge
+bin/*_debug
+bin/libs/
+bin/*.dll
+
+# --- compiled artefacts ----------------------------------------------
+*.d
 *.o
 *.obj
-
-# Precompiled Headers
+*.slo
+*.lo
 *.gch
 *.pch
-
-# Linker files
 *.ilk
-
-# Debugger Files
 *.pdb
-
-# Compiled Dynamic libraries
+*.dwo
 *.so
+*.so.*
 *.dylib
 *.dll
-*.so.*
-
-
-# Fortran module files
-*.mod
-*.smod
-
-# Compiled Static libraries
-*.lai
-*.la
 *.a
 *.lib
-
-# Executables
+*.la
+*.lai
 *.exe
 *.out
 *.app
+*.mod
+*.smod
 
-# Build directories
+# --- per-platform project files projectGenerator emits ---------------
+#
+# The project files themselves are worth keeping; the per-user state
+# inside them is not.
+*.xcodeproj/xcuserdata/
+*.xcodeproj/project.xcworkspace/xcuserdata/
+*.xcworkspace/xcuserdata/
+*.vcxproj.user
+*.suo
+*.sdf
+*.opensdf
+.vs/
+Debug/
+Release/
+x64/
+Win32/
+*.VC.db
+*.VC.opendb
+.qmake.stash
+*.pro.user
+
+# --- other build systems ---------------------------------------------
 build/
 Build/
 build-*/
-
-# CMake generated files
 CMakeFiles/
 CMakeCache.txt
 cmake_install.cmake
-Makefile
 install_manifest.txt
+Testing/
+vcpkg_installed/
+
+# --- editor / OS noise -----------------------------------------------
+.DS_Store
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+desktop.ini
+*.swp
+*~
+.cache/
+.clangd/
 compile_commands.json
 
-# Temporary files
+# --- .obj means two different things ---------------------------------
+#
+# `*.obj` above is the MSVC object-file pattern, and it also matches
+# Wavefront .obj -- so it silently ignored every avatar mesh the drape
+# simulation loads. Those are inputs, not build output.
+!data/**/*.obj
+!bin/data/**/*.obj
+
+# The two meshes the app actually loads are female_m.obj and male_m.obj
+# (see ofApp::loadAvatar). These came with them and nothing references
+# them: the avatar is drawn with vertex colours and scene lighting, not
+# textures. 32 MB of the 50 MB here, and binaries are permanent once
+# committed -- so they stay on disk and out of history. Delete these four
+# lines if you ever wire them up.
+data/avatar/female.obj
+data/avatar/female.mtl
+data/avatar/*.jpg
+data/avatar/*.png
+
+# --- this app's own output -------------------------------------------
+#
+# Exported packages are generated (PDFs, DXF, zips), large, and rebuild
+# from their own source/design-project.json. Keep the design, not the
+# output.
+patternForge-exports/
 *.tmp
 *.log
 *.bak
-*.swp
-
-# vcpkg
-vcpkg_installed/
-
-# debug information files
-*.dwo
-
-# test output & cache
-Testing/
-.cache/

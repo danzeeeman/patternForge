@@ -1,0 +1,74 @@
+# MTL Exporter v1.0 by Seungwoo Oh at CLO - Virtual Fashion Inc.
+newmtl leg3
+Ka 0.257132 0.257132 0.257132
+Kd 1.000000 1.000000 1.000000
+Ks 0.480000 0.480000 0.480000
+Ns 128.000000
+illum 2
+d 1.000000
+newmtl face3
+Ka 0.257132 0.257132 0.257132
+Kd 1.000000 1.000000 1.000000
+Ks 0.480000 0.480000 0.480000
+Ns 128.000000
+illum 2
+d 1.000000
+newmtl arm3
+Ka 0.257132 0.257132 0.257132
+Kd 1.000000 1.000000 1.000000
+Ks 0.480000 0.480000 0.480000
+Ns 128.000000
+illum 2
+d 1.000000
+newmtl body6
+Ka 0.257132 0.257132 0.257132
+Kd 1.000000 1.000000 1.000000
+Ks 0.480000 0.480000 0.480000
+Ns 128.000000
+illum 2
+d 1.000000
+newmtl eye10
+Ka 0.257132 0.257132 0.257132
+Kd 1.000000 1.000000 1.000000
+Ks 0.480000 0.480000 0.480000
+Ns 128.000000
+illum 2
+d 1.000000
+map_Ka /Users/dantheman/src/openFrameworks/apps/myApps/patternForge/data/avatar/transparency_442343_121430_135537.png
+map_Kd /Users/dantheman/src/openFrameworks/apps/myApps/patternForge/data/avatar/transparency_442343_121430_135537.png
+newmtl eyelash10
+Ka 0.257132 0.257132 0.257132
+Kd 1.000000 1.000000 1.000000
+Ks 0.480000 0.480000 0.480000
+Ns 128.000000
+illum 2
+d 1.000000
+map_Ka /Users/dantheman/src/openFrameworks/apps/myApps/patternForge/data/avatar/transparency_442343_121430_135537.png
+map_Kd /Users/dantheman/src/openFrameworks/apps/myApps/patternForge/data/avatar/transparency_442343_121430_135537.png
+newmtl eye11
+Ka 0.257132 0.257132 0.257132
+Kd 1.000000 1.000000 1.000000
+Ks 0.480000 0.480000 0.480000
+Ns 128.000000
+illum 2
+d 1.000000
+map_Ka /Users/dantheman/src/openFrameworks/apps/myApps/patternForge/data/avatar/transparency_442343_121430_135537.png
+map_Kd /Users/dantheman/src/openFrameworks/apps/myApps/patternForge/data/avatar/transparency_442343_121430_135537.png
+newmtl eyelash11
+Ka 0.257132 0.257132 0.257132
+Kd 1.000000 1.000000 1.000000
+Ks 0.480000 0.480000 0.480000
+Ns 128.000000
+illum 2
+d 1.000000
+map_Ka /Users/dantheman/src/openFrameworks/apps/myApps/patternForge/data/avatar/transparency_442343_121430_135537.png
+map_Kd /Users/dantheman/src/openFrameworks/apps/myApps/patternForge/data/avatar/transparency_442343_121430_135537.png
+newmtl toothSG10
+Ka 0.257132 0.257132 0.257132
+Kd 1.000000 1.000000 1.000000
+Ks 0.480000 0.480000 0.480000
+Ns 128.000000
+illum 2
+d 1.000000
+map_Ka /Users/dantheman/src/openFrameworks/apps/myApps/patternForge/data/avatar/transparency_442343_121430_135537.png
+map_Kd /Users/dantheman/src/openFrameworks/apps/myApps/patternForge/data/avatar/transparency_442343_121430_135537.png
