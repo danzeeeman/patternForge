@@ -1,5 +1,34 @@
 # patternForge
 
+> ## ⚠️ MAJOR WORK IN PROGRESS
+>
+> **Do not cut cloth from this yet.** Nothing here has been sewn. The
+> blocks are simplified, dart-free slopers built from common ratios, not
+> fitted commercial patterns — sew a toile first, and expect to correct
+> it.
+>
+> Roughly where things stand:
+>
+> | | |
+> |---|---|
+> | Drafting, checks, PDF / DXF / CLO3D export | works, and is tested |
+> | Outline editing, derived facings, muslin | works |
+> | **Drape simulation** | **experimental, and visibly wrong at the armhole** |
+> | Sizes | five graded presets, no free-form measurements |
+> | Darts | geometry exists, off by default (breaks seam-length checks) |
+>
+> The drape is the part to distrust, and the dividing line is the
+> **set-in sleeve**. Sleeveless garments sew and hang cleanly — a
+> sleeveless dress, skirt, vest or trousers settle with no badly
+> stretched cloth anywhere. Add a sleeve and the shoulder tears open,
+> because a sleeve cap is a dome and the placement approximates it with a
+> tube on the arm, so the armhole seam starts several centimetres apart.
+> Coats are worst. Read [Known limitations](#known-limitations) before
+> relying on any of it.
+>
+> APIs, parameter names and the design-JSON format all change without
+> notice.
+
 An interactive openFrameworks app that parametrically drafts garments and
 exports print-ready pattern packages.
 
@@ -16,24 +45,61 @@ triangulated, held off an avatar mesh, sewn along the garment's own seam
 list, and then released under gravity. That is the only way to see what a
 pattern *does* rather than what it measures.
 
-Built alongside `~/src/dress-forms`, whose two coat packages
-(`Facet-Coat-US4-Pattern-Package`,
-`03-Prism-Cape-Coat-US4-Pattern-Package-2`) define the export contract
-every design here follows.
+The export format is not invented here. Two hand-built coat packages in
+`data/references/` define the contract every design follows — same file
+set, same board layout, same `sewing_cm`/`cutting_cm`/`cut`/`note` fields
+in the geometry JSON — so a package this app generates is
+interchangeable with one made by hand:
+
+- `data/references/Facet-Coat-US4-Pattern-Package/`
+- `data/references/03-Prism-Cape-Coat-US4-Pattern-Package-2/`
+
+Each also carries the `refine_coats.py` that produced it, which is the
+reference for the extract-and-reshape path described under
+[Known limitations](#known-limitations).
+
+## Addons
+
+One, and **not the upstream one** — that is the only thing here that is
+easy to get wrong:
+
+| Addon | Source | Commit |
+|---|---|---|
+| `ofxImGui` | <https://github.com/danzeeeman/ofxImGui.git> | `3ddb3519ba5687e3f45257330e36d73fecef80de` |
+
+That fork is one commit ahead of
+[jvcleave/ofxImGui](https://github.com/jvcleave/ofxImGui), and the commit
+does not exist upstream — clone upstream and this does not compile. imgui
+(1.77 WIP) is vendored inside the addon, not a submodule, so a shallow or
+partial clone will be missing `libs/imgui/src/`.
+
+A script clones it into your openFrameworks tree at the pinned commit:
+
+```
+./scripts/install-addons.sh              # macOS / Linux
+.\scripts\install-addons.ps1             # Windows
+```
+
+Both are safe to re-run; add `--update` / `-Update` to move an existing
+clone onto the pinned commit. They read `OF_ROOT` out of `config.make` to
+find the tree, warn if the openFrameworks version is not 0.12.x, check
+every entry in `addons.make` is accounted for, and exit non-zero if
+anything is missing.
 
 ## Build and run
 
 From this directory, inside an openFrameworks 0.12.x checkout:
 
 ```
+./scripts/install-addons.sh
 make -j8
 cd bin/patternForge.app/Contents/MacOS/ && ./patternForge
 ```
 
-The only addon is `ofxImGui`. PDF output uses openFrameworks' own
-`ofCairoRenderer`, so there is no extra PDF dependency. Polygon
-offset/boolean work uses a vendored copy of Angus Johnson's Clipper
-(`src/geometry/thirdparty/clipper`, Boost licence).
+PDF output uses openFrameworks' own `ofCairoRenderer`, so there is no
+extra PDF dependency. Polygon offset/boolean work uses a vendored copy of
+Angus Johnson's Clipper (`src/geometry/thirdparty/clipper`, Boost
+licence).
 
 ## Garments
 
@@ -153,11 +219,11 @@ See `docs/authoring-design-json.md` for the design-file format.
 ## Known limitations
 
 - **Sizes are presets**, not free-form body measurements.
-- **Coat is drafted from the body block**, not remixed from the
-  `Facet-Coat`/`Prism-Cape-Coat` source PDFs. Extracting a supplied
-  pattern's dashed cutlines needs a PDF-parsing dependency that is not
-  here yet; `refine_coats.py` in `dress-forms` is the reference for that
-  path.
+- **Coat is drafted from the body block**, not remixed from the source
+  PDFs in `data/references/*/source/`. Extracting a supplied pattern's
+  dashed cutlines needs a PDF-parsing dependency that is not here yet;
+  the `refine_coats.py` inside each reference package is the working
+  example of that path.
 - Blocks are **simplified, dart-free slopers** built from common ratios
   (bust/4, hip/4, …) — a generative development draft, not a fitted
   commercial pattern. Every exported manual carries that caveat. Dart
